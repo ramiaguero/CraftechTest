@@ -21,3 +21,19 @@ En cuanto a la base de datos, se utiliza **Amazon RDS** en una configuración **
 ## Alta Disponibilidad
 
 El diseño de la infraestructura cumple con los requisitos de **alta disponibilidad (HA)** mediante la distribución de los recursos en múltiples **Availability Zones**, asegurando que, en caso de falla de una zona, los recursos en otras zonas puedan seguir funcionando sin interrupciones. El **Auto Scaling Group**, el **ALB**, y las configuraciones de **RDS Multi-AZ** y **DynamoDB VPC Endpoint** permiten que la aplicación se adapte dinámicamente a los cambios en la carga de trabajo y garantice una experiencia continua y sin interrupciones para el usuario final.
+
+## Security Groups, roles y politicas
+
+No se incluyeron en el diagrama ya que lo dejaria muy cargado y el limite de espacio aqui por consigna no creo me permita explayarme en detalle, sobre inbound y outbound rules y politicas especificas.
+
+### Security Groups:
+1. ALB Security Group
+2. EC2 Instances Security Group (Backend)
+3. RDS Security Group
+4. DynamoDB Security Group (via VPC Endpoint)
+
+### IAM Policies/Roles:
+1. EC2 Role
+2. CloudFront Role
+3. RDS IAM Role
+4. VPC Endpoint Role
