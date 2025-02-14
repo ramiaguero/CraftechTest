@@ -7,19 +7,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Secret Key
 SECRET_KEY = os.getenv("SECRET_KEY", "your-django-secret-key")
 
-# Debug Mode
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+# Debug Mode (Ensures it's a boolean)
+DEBUG = os.getenv("DEBUG", "False").strip().lower() in ("true", "1", "yes")
 
-# Allowed Hosts
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+# Allowed Hosts (Ensures Proper Splitting & Default Values)
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").replace(" ", "").split(",")
+
+# Default Allowed Hosts if empty or misconfigured
 if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
     ALLOWED_HOSTS = [
         "localhost",
         "127.0.0.1",
         "backend-service",
         "backend-service.default.svc.cluster.local",
-        "a4db59dda552049758b4e2cb631de79d-1080103396.us-east-1.elb.amazonaws.com",
-        "a50ec3b714a554d65a17dbcd37703451-475530952.us-east-1.elb.amazonaws.com",
+        "aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com",
     ]
 
 # Installed Apps
@@ -37,9 +38,9 @@ INSTALLED_APPS = [
     "api.authentication",
 ]
 
-# Middleware
+# Middleware (CORS Middleware MUST be first)
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # CORS MUST be first!
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -72,7 +73,7 @@ TEMPLATES = [
 # WSGI Application
 WSGI_APPLICATION = "core.wsgi.application"
 
-# Database
+# Database Configuration
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("SQL_ENGINE", "django.db.backends.postgresql"),
@@ -95,21 +96,22 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
 
-# CORS Settings
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").replace(" ", "").split(",")
+
 if not CORS_ALLOWED_ORIGINS or CORS_ALLOWED_ORIGINS == [""]:
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "http://a4db59dda552049758b4e2cb631de79d-1080103396.us-east-1.elb.amazonaws.com",
-        "http://a50ec3b714a554d65a17dbcd37703451-475530952.us-east-1.elb.amazonaws.com",
+        "http://a1ea82fa5c25a46e4a572f1871350ccb-1392024633.us-east-1.elb.amazonaws.com",
     ]
 
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ["*"]
 
-# CSRF Trusted Origins (Allow API calls from frontend)
+
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
 # Static & Media Files

@@ -3,10 +3,10 @@ kind: ConfigMap
 metadata:
   name: django-env
 data:
-  DATABASE_URL: "postgres://{{ .Values.database.user }}:{{ .Values.database.password }}@{{ .Values.database.host }}:{{ .Values.database.port }}/{{ .Values.database.name }}"
+  DATABASE_URL: "postgres://admin:supersecret@postgres-service:5432/django_db"
   DJANGO_SETTINGS_MODULE: "core.settings"
-  DEBUG: "1"
-  DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 [::1]"
+  DEBUG: "False"
+  DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,[::1],backend-service,backend-service.default.svc.cluster.local,aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com"
 
   SQL_ENGINE: "django.db.backends.postgresql"
   SQL_DATABASE: "{{ .Values.database.name }}"

@@ -1,24 +1,22 @@
-# Use Node.js as the base image
-FROM node:16
+# Use Python as the base image
+FROM python:3.10
 
-# Set the working directory
-WORKDIR /app/frontend
+# Set the working directory inside the container
+WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
+# Copy and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire frontend code
+# Copy the entire backend code
 COPY . .
 
-# Build the React app
-RUN npm run build
+# Set environment variables (optional but recommended)
+ENV PORT=8000
+ENV DJANGO_SETTINGS_MODULE=core.settings
 
-# Install `serve` globally (for serving the React build)
-RUN npm install -g serve
+# Expose port 8000 for Django
+EXPOSE 8000
 
-# Expose the port the app runs on
-EXPOSE 3000
-
-# Start the frontend using `serve`
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Run the Django server
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "core.wsgi:application"]

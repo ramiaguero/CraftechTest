@@ -1,6 +1,6 @@
 image:
-  backend: "ramiroaguero/craftechtest:backend-v1.16.17"
-  frontend: "ramiroaguero/craftechtest:frontend-v1.16.30"
+  backend: "ramiroaguero/craftechtest:backend-1.17.6"
+  frontend: "ramiroaguero/craftechtest:frontend-1.17.4"
   pullPolicy: Always
 
 service:
@@ -16,24 +16,15 @@ database:
   port: "5432"
 
 env:
-  DJANGO_ALLOWED_HOSTS: "backend-service,backend-service.default.svc.cluster.local,a4db59dda552049758b4e2cb631de79d-1080103396.us-east-1.elb.amazonaws.com,a50ec3b714a554d65a17dbcd37703451-475530952.us-east-1.elb.amazonaws.com"
-  CORS_ALLOWED_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000,http://a4db59dda552049758b4e2cb631de79d-1080103396.us-east-1.elb.amazonaws.com,http://a50ec3b714a554d65a17dbcd37703451-475530952.us-east-1.elb.amazonaws.com"
-  DEBUG: "False"
-
-serviceAccount:
-  create: true
-  name: django-service-account
-  automount: true
-  annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::037380703489:role/eksctl-craftech-cluster-cluster-ServiceRole-j7EkuXzGfcfE"
-
-ingress:
-  enabled: false
-
-secretKey: "your-django-secret-key"
+  DJANGO_ALLOWED_HOSTS: "backend-service,backend-service.default.svc.cluster.local,aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com"
+  CORS_ALLOWED_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000,http://a1ea82fa5c25a46e4a572f1871350ccb-1392024633.us-east-1.elb.amazonaws.com:3000"
+  REACT_APP_BACKEND_URL: "http://aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com:8000"
 
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
+
+ingress:
+  enabled: false
