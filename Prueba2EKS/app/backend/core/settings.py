@@ -1,19 +1,18 @@
 import os
 from pathlib import Path
 
-# Base Directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Secret Key
+
 SECRET_KEY = os.getenv("SECRET_KEY", "your-django-secret-key")
 
-# Debug Mode (Ensures it's a boolean)
+
 DEBUG = os.getenv("DEBUG", "False").strip().lower() in ("true", "1", "yes")
 
-# Allowed Hosts (Ensures Proper Splitting & Default Values)
+
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").replace(" ", "").split(",")
 
-# Default Allowed Hosts if empty or misconfigured
+
 if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
     ALLOWED_HOSTS = [
         "localhost",
@@ -23,7 +22,7 @@ if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
         "aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com",
     ]
 
-# Installed Apps
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -38,7 +37,7 @@ INSTALLED_APPS = [
     "api.authentication",
 ]
 
-# Middleware (CORS Middleware MUST be first)
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -50,10 +49,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-# Root URL Configuration
+
 ROOT_URLCONF = "core.urls"
 
-# Templates
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -70,10 +69,10 @@ TEMPLATES = [
     },
 ]
 
-# WSGI Application
+
 WSGI_APPLICATION = "core.wsgi.application"
 
-# Database Configuration
+
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("SQL_ENGINE", "django.db.backends.postgresql"),
@@ -85,10 +84,10 @@ DATABASES = {
     }
 }
 
-# Authentication User Model
+
 AUTH_USER_MODEL = "api_user.User"
 
-# REST Framework Settings
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "api.authentication.backends.ActiveSessionAuthentication",
