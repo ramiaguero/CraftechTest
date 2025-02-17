@@ -1,0 +1,24 @@
+# copilot/db/manifest.yml
+
+name: db
+type: Backend Service
+
+image:
+  build: app/db/Dockerfile
+  port: 5432
+
+cpu: 256
+memory: 512
+count: 1
+exec: true
+network:
+  connect: true
+
+# Environment variables that the official Postgres image expects.
+variables:
+  POSTGRES_USER: "user"
+  POSTGRES_PASSWORD: "password"
+  POSTGRES_DB: "testdb"
+
+# Because this is just a private ephemeral DB, no need for an ALB or HTTP checks.
+# With "Backend Service" and no "http:" block, Copilot won't create an ALB.
