@@ -7,9 +7,8 @@ on:
       - Development
       - Feature-prueba3
     paths:
-      - 'Prueba3/index.html'
+      - 'Prueba3/**'  
       - '.github/workflows/**'
-      - 'Prueba3/Dockerfile'
 
 env:
   DOCKER_IMAGE: ramiroaguero/craftech
@@ -17,7 +16,6 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,8 +23,16 @@ jobs:
           fetch-depth: 0
           ref: ${{ github.ref }}
 
-      - name: Debug repository structure
-        run: ls -R
+      - name: Debug Info
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "Prueba3 directory contents:"
+          ls -la Prueba3
+          echo "Current branch:"
+          git branch --show-current
+          echo "Modified files:"
+          git diff --name-only HEAD~1 HEAD
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -46,9 +52,14 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: self-hosted
-    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          
       - name: Deploy latest version
+        working-directory: Prueba3
         run: |
           docker-compose down
           docker system prune -af
