@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - Development
-      - Feature-Prueba3
+      - Feature-prueba3
     paths:
       - 'Prueba3/index.html'
       - '.github/workflows/**'
