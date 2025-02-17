@@ -7,7 +7,7 @@ on:
       - Development
       - Feature-prueba3
     paths:
-      - 'Prueba3/**'  # This will catch any changes in the Prueba3 directory
+      - 'Prueba3/index.html'
       - '.github/workflows/**'
 
 env:
