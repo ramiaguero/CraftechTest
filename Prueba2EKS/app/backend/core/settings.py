@@ -3,15 +3,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = os.getenv("SECRET_KEY", "your-django-secret-key")
-
 
 DEBUG = os.getenv("DEBUG", "False").strip().lower() in ("true", "1", "yes")
 
-
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").replace(" ", "").split(",")
-
 
 if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
     ALLOWED_HOSTS = [
@@ -19,9 +15,8 @@ if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
         "127.0.0.1",
         "backend-service",
         "backend-service.default.svc.cluster.local",
-        "aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com",
+        "a36296300e9b941eb851c99d553e43f6-1459072743.us-east-1.elb.amazonaws.com",
     ]
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -37,7 +32,6 @@ INSTALLED_APPS = [
     "api.authentication",
 ]
 
-
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -49,9 +43,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-
 ROOT_URLCONF = "core.urls"
-
 
 TEMPLATES = [
     {
@@ -69,9 +61,7 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = "core.wsgi.application"
-
 
 DATABASES = {
     "default": {
@@ -84,9 +74,7 @@ DATABASES = {
     }
 }
 
-
 AUTH_USER_MODEL = "api_user.User"
-
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -95,14 +83,13 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
 
-
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").replace(" ", "").split(",")
 
 if not CORS_ALLOWED_ORIGINS or CORS_ALLOWED_ORIGINS == [""]:
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "http://a1ea82fa5c25a46e4a572f1871350ccb-1392024633.us-east-1.elb.amazonaws.com",
+        "http://af41c0d4453294d058038bbe1b7d3cc3-884279893.us-east-1.elb.amazonaws.com",
     ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -110,14 +97,13 @@ CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ["*"]
 
-
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
-# Static & Media Files
+
 STATIC_URL = "/api_static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = "/api_media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Default Auto Field
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

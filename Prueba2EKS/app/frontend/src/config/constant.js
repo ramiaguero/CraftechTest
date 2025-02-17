@@ -1,10 +1,10 @@
 export const BASENAME = ''; // don't add '/' at the end of BASENAME
 export const BASE_URL = '/app/dashboard/default';
 export const BASE_TITLE = ' | Craftech Example App ';
-export const API_SERVER = 'http://aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com:8000/api/';
+export const API_SERVER = 'http://a36296300e9b941eb851c99d553e43f6-1459072743.us-east-1.elb.amazonaws.com:8000/api/';
 
 export const CONFIG = {
-    API_SERVER: 'http://aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com:8000/api/',
+    API_SERVER: 'http://a36296300e9b941eb851c99d553e43f6-1459072743.us-east-1.elb.amazonaws.com:8000/api/',
     layout: 'vertical',
     subLayout: '',
     collapseMenu: false,

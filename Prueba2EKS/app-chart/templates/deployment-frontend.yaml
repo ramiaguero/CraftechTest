@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: "{{ .Values.image.frontend }}"  # Make sure this is the latest working image
+          image: "{{ .Values.image.frontend }}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
           ports:
             - containerPort: 3000
-          env:
-            - name: REACT_APP_BACKEND_URL
-              value: "http://aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com:8000"
+          envFrom:
+            - configMapRef:
+                name: frontend-config

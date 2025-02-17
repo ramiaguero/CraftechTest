@@ -1,15 +1,23 @@
-FROM python:3.10
+FROM node:16
 
-WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /app/frontend
+
+
+COPY package*.json ./
+RUN npm install
+
 
 COPY . .
 
-ENV PORT=8000
-ENV DJANGO_SETTINGS_MODULE=core.settings
 
-EXPOSE 8000
+RUN npm run build
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "core.wsgi:application"]
+
+RUN npm install -g serve
+
+
+EXPOSE 3000
+
+
+CMD ["serve", "-s", "build", "-l", "3000"]

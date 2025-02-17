@@ -6,7 +6,7 @@ data:
   DATABASE_URL: "postgres://admin:supersecret@postgres-service:5432/django_db"
   DJANGO_SETTINGS_MODULE: "core.settings"
   DEBUG: "False"
-  DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,[::1],backend-service,backend-service.default.svc.cluster.local,aaffc0a22feb44a18be60ad86a9d24b1-935174219.us-east-1.elb.amazonaws.com"
+  DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,[::1],backend-service,backend-service.default.svc.cluster.local,a36296300e9b941eb851c99d553e43f6-1459072743.us-east-1.elb.amazonaws.com"
 
   SQL_ENGINE: "django.db.backends.postgresql"
   SQL_DATABASE: "{{ .Values.database.name }}"
