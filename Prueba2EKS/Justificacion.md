@@ -1,3 +1,7 @@
+**demo**
+
+https://youtu.be/DgKLE_GWp34
+
 # **Justificación del Uso de EKS**
 
 Decidí usar Amazon EKS para desplegar la aplicación, no tanto por su funcionalidad actual, sino por lo que representa en términos de arquitectura. Aunque la app en sí no es tan compleja ahora mismo, si en el futuro crece con más microservicios, como un chat u otros módulos, lo más eficiente sería tener cada uno separado en Kubernetes, con su propio Deployment y Service, comunicándose a través de NodePorts y con un Ingress manejando el tráfico externo.
