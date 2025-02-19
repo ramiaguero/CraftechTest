@@ -1,5 +1,9 @@
 # Prueba 3 - CI/CD: Dockerizar un Nginx con index.html Default
 
+**dejo la t2 micro corriendo para que puedan testearlo si gustan**
+
+ec2-75-101-216-18.compute-1.amazonaws.com
+
 ## Descripción
 
 Esta solución implementa un proceso de Integración y Despliegue Continuo (CI/CD) para una aplicación web sencilla basada en Nginx. El objetivo es detectar cualquier cambio en el archivo `index.html` (ubicado en la carpeta `Prueba3`), construir una nueva imagen de Docker con la versión actualizada y desplegarla automáticamente utilizando Docker Compose en un entorno de producción.
